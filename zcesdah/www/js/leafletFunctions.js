@@ -16,7 +16,7 @@ function addPointLinePoly() {
 	fillOpacity: 0.5
 	}).addTo(mymap).bindPopup("I am a line.");
 
-// add a polygon with 3 end points (i.e. a triangle)
+	// add a polygon with 3 end points (i.e. a triangle)
 	var myPolygon = L.polygon(
 	[[51.509, -0.08],
 	[51.503, -0.06],
@@ -27,11 +27,9 @@ function addPointLinePoly() {
 	}).addTo(mymap).bindPopup("I am a polygon.");
 }
 
+var earthquakelayer;
+
 function getEarthquakes() {
-	// and a variable that will hold the layer itself – we need to do this outside the function so that wecan use it to remove the layer later on
-	var earthquakelayer;
-	// create the code to get the Earthquakes data using an XMLHttpRequest
-	function getEarthquakes() {
 	client = new XMLHttpRequest();
 	client.open('GET','https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson');
 	client.onreadystatechange = earthquakeResponse; // note don't use earthquakeResponse() with brackets as that doesn't work
@@ -56,8 +54,4 @@ function getEarthquakes() {
 	earthquakelayer = L.geoJson(earthquakejson).addTo(mymap);
 	// change the map zoom so that all the data is shown
 	mymap.fitBounds(earthquakelayer.getBounds());
-}}
-
-
-
-
+	}
