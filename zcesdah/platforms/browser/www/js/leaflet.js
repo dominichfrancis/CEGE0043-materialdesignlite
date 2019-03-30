@@ -6,13 +6,3 @@ attribution: 'Map data &copy; <ahref="http://openstreetmap.org">OpenStreetMap</a
 'Imagery © <a href="http://mapbox.com">Mapbox</a>',
 id: 'mapbox.streets'
 }).addTo(mymap);
-
-// <!-- new custom marker -->
-var testMarkerRed = L.AwesomeMarkers.icon({
-icon: 'play',
-markerColor: 'red'
-});
-var testMarkerPink = L.AwesomeMarkers.icon({
-icon: 'play',
-markerColor: 'pink'
-});
