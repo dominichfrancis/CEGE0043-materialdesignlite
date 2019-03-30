@@ -8,6 +8,15 @@ function addPointLinePoly() {
 	L.marker([51.5, -0.09]).addTo(mymap)
 	.bindPopup("<b>Hello world!</b><br />I am a popup.").openPopup();
 
+
+    //adding a circle
+    L.circle([51.5,-0.08],50000, {
+    	color:'red',
+    	fillColor:'#f03',
+    	fillOpacity: 0.5
+        }).addTo(mymap);
+
+
 	var myLine = L.polyline(
 	[[51.504, -0.02],
 	[51.51, -0.08]],
@@ -16,7 +25,7 @@ function addPointLinePoly() {
 	fillOpacity: 0.5
 	}).addTo(mymap).bindPopup("I am a line.");
 
-	// add a polygon with 3 end points (i.e. a triangle)
+/*	// add a polygon with 3 end points (i.e. a triangle)
 	var myPolygon = L.polygon(
 	[[51.509, -0.08],
 	[51.503, -0.06],
@@ -24,7 +33,7 @@ function addPointLinePoly() {
 	{color: 'red',
 	fillColor: '#f03',
 	fillOpacity: 0.5
-	}).addTo(mymap).bindPopup("I am a polygon.");
+	}).addTo(mymap).bindPopup("I am a polygon.");*/
 }
 
 var earthquakelayer;
