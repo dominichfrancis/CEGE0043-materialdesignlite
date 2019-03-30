@@ -3,5 +3,10 @@ function trackAndCircle() {
 	addPointLinePoly();
 }
 
+function startup() {
+	document.addEventListener('DOMContentLoaded',function() {
+		trackAndCircle ();
+	}, false);
+}
 
 
