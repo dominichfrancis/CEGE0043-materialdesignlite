@@ -12,7 +12,7 @@ function trackLocation() {
 
 	var userMarker
 	function showPosition(position) {
-		(userMarker){
+		if (userMarker){
 			mymap.removelayer(userMarker);
 	}
     userMarker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(mymap)
