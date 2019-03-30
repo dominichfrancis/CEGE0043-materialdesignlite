@@ -12,6 +12,9 @@ function trackLocation() {
 
 	var userMarker
 	function showPosition(position) {
+		(userMarker){
+			mymap.removelayer(userMarker);
+	}
     userMarker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(mymap)
     .bindPopup("<b>You were here</b>");
     mymap.setView([position.coords.latitude.position.coords.longitude],13)}
