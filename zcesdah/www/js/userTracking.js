@@ -23,7 +23,7 @@ function trackLocation() {
 function getDistance() {
 	alert('getting distance');
 	// getDistanceFromPoint is the function called once the distance has been found
-	navigator.geolocation.getCurrentPosition(getDistanceFromPoint);
+	navigator.geolocation.getCurrentPosition(getDistanceFromMultiplePoints);
 }
 
 function getDistanceFromPoint(position) {
@@ -39,6 +39,21 @@ function getDistanceFromPoint(position) {
 		mymap.setView([position.coords.latitude.position.coords.longitude],2)
 }
 }
+
+function getDistanceFromMultiplePoints(position) {
+	var minDistance = 100000000000; //min distance
+	var closestQuake = ""; //varibale to store nearestquake
+	for(var i = 0; i < earthquakes.features.length; i++){
+		var obj = earthquakes.features[i]; //creating variable to hold earthquake properties from data
+		        var distance = calculateDistance(position.coords.latitude,position.coords.longitude,obj.geometry.coordinates[0],obj.geometry[1], 'K'); //using geometry coordinates for points to measure distance
+		        if (distance < minDistance){
+		        	       minDistance = distance;
+		        	       closestQuake = obj.properties.place;
+		        }
+	}
+	alert("Earthquake: " + closestQuake + "is distance" + minDistance + "away");
+}
+
 
 // code adapted from https://www.htmlgoodies.com/beyond/javascript/calculate-the-distance-between-two-points-inyour-web-apps.html
 function calculateDistance(lat1, lon1, lat2, lon2, unit) {
