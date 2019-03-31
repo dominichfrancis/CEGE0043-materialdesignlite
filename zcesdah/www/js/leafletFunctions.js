@@ -6,7 +6,16 @@ var earthquakes;
 function addPointLinePoly() {
 
 	L.marker([51.5, -0.09]).addTo(mymap)
-	.bindPopup("<b>Hello world!</b><br />I am a popup.").openPopup();
+	.bindPopup("<b>Hello!</b><br />Point of interest.").openPopup();
+
+
+    //adding a circle
+    L.circle([51.5,-0.09],100, {
+    	color:'red',
+    	fillColor:'#f03',
+    	fillOpacity: 0.5
+        }).addTo(mymap);
+
 
 	var myLine = L.polyline(
 	[[51.504, -0.02],
@@ -16,7 +25,7 @@ function addPointLinePoly() {
 	fillOpacity: 0.5
 	}).addTo(mymap).bindPopup("I am a line.");
 
-	// add a polygon with 3 end points (i.e. a triangle)
+/*	// add a polygon with 3 end points (i.e. a triangle)
 	var myPolygon = L.polygon(
 	[[51.509, -0.08],
 	[51.503, -0.06],
@@ -24,7 +33,7 @@ function addPointLinePoly() {
 	{color: 'red',
 	fillColor: '#f03',
 	fillOpacity: 0.5
-	}).addTo(mymap).bindPopup("I am a polygon.");
+	}).addTo(mymap).bindPopup("I am a polygon.");*/
 }
 
 var earthquakelayer;
@@ -49,7 +58,9 @@ function getEarthquakes() {
 	// convert the received data - which is text - to JSON format and add it to the map
 	function loadEarthquakelayer(earthquakedata) {
 	// convert the text to JSON
-	var earthquakejson = JSON.parse(earthquakedata); 
+	var earthquakejson = JSON.parse(earthquakedata);
+	// new line to call global variable
+	earthquakes = earthquakejson;
 	// add the JSON layer onto the map - it will appear using the default icons
 	earthquakelayer = L.geoJson(earthquakejson).addTo(mymap);
 	// change the map zoom so that all the data is shown
