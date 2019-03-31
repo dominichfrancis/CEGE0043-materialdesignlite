@@ -6,11 +6,11 @@ var earthquakes;
 function addPointLinePoly() {
 
 	L.marker([51.5, -0.09]).addTo(mymap)
-	.bindPopup("<b>Hello world!</b><br />I am a popup.").openPopup();
+	.bindPopup("<b>Hello!</b><br />Point of interest.").openPopup();
 
 
     //adding a circle
-    L.circle([51.5,-0.08],50000, {
+    L.circle([51.5,-0.09],100, {
     	color:'red',
     	fillColor:'#f03',
     	fillOpacity: 0.5

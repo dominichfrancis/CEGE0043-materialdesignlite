@@ -6,7 +6,7 @@ function trackLocation() {
 	} else {
 		document.getElementById('showLocation').innerHTML = "Geolocation not supported by browser";
 	}
-	}
+}
 
 	var userMarker
 	function showPosition(position) {
@@ -14,8 +14,10 @@ function trackLocation() {
 			mymap.removelayer(userMarker);
 	}
     userMarker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(mymap)
-    .bindPopup("<b>You were here</b>").openPopup();
-    mymap.setView([position.coords.latitude.position.coords.longitude],13)}
+    .bindPopup("<b>You were here</b>");
+    getDistance();
+    mymap.setView([position.coords.latitude.position.coords.longitude],2)
+}
 
 
 function getDistance() {
@@ -31,7 +33,11 @@ function getDistanceFromPoint(position) {
 	var lng = -0.193565;
 	// return the distance in kilometers
 	var distance = calculateDistance(position.coords.latitude, position.coords.longitude, lat,lng, 'K');
-	document.getElementById('showDistance').innerHTML = "Distance: " + distance;
+	if (dist < 0.1){
+		L.marker([position.coords.latitude, position.coords.longitude]).addTo(mymap)
+		.bindPopup("<b>less than 100m proximity alert</b>").openPopup();
+		mymap.setView([position.coords.latitude.position.coords.longitude],2)
+}
 }
 
 // code adapted from https://www.htmlgoodies.com/beyond/javascript/calculate-the-distance-between-two-points-inyour-web-apps.html
