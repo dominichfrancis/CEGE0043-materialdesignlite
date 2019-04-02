@@ -27,6 +27,9 @@ integrity="sha512-mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K
 "
 crossorigin=""></script>
 
+<!--W3 schools reference to use forms-->
+<script src="https://www.w3schools.com/lib/w3.js"></script>
+
 <!-- the following CSS is used to set the size of the Map -->
 <style type="text/css">#mapid { height: 500px; }</style>
 
@@ -157,10 +160,10 @@ crossorigin=""></script>
       </div>
       <main class="mdl-layout__content mdl-color--grey-100">
                  <div id="mapid" style="width: 600px; height:400px;"></div> 
-                 <div id="ajaxtext" style="width:1600px; height: 20px;">this is the unchanged div content</div>
-                 <p>Type the html file name here - note you need to include .html</p>
-                 <input type="text" name="filename" id="filename" size=50>
-                 <button id="button1" onclick="callDivNodeJSChange()">Click me to change the DIV content</button>
+                 <div>
+                 <div id="ajaxtext" style="width: 1600px; height: 20px;">
+                 <div w3-include-html="createForm.html"></div>
+                 </div>
       </main>
     </div>
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
@@ -172,6 +175,7 @@ crossorigin=""></script>
     <script src="js/userTracking.js"></script>
     <script src="js/utilities.js"></script>
     <script src="js/AJAX.js"></script>
+    <script src="js/uploadData.js"></script>
     <script src="js/startup.js"></script>
     <script>startup(); </script>
 
