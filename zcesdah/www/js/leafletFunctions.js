@@ -32,7 +32,7 @@ var formdatalayer;
 
 function getFormData() {
 	client = new XMLHttpRequest();
-	var url = 'http://developer.cege.ucl.ac.uk:'+ 30279 + '/getFormData/' + 30279;
+	var url = 'http://developer.cege.ucl.ac.uk:'+ 30279 + '/getGeoJSON/'+'london_poi'+'/geom';
 	client.open('GET',url);
 	client.onreadystatechange = formdataResponse; // note don't use earthquakeResponse() with brackets as that doesn't work
 	client.send();
