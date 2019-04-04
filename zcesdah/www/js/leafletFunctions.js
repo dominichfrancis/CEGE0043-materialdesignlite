@@ -1,6 +1,6 @@
 var client;
 
-var earthquakes;
+var forms;
 
 // create point, line and poly
 function addPointLinePoly() {
@@ -17,52 +17,71 @@ function addPointLinePoly() {
         }).addTo(mymap);
 
 
-	var myLine = L.polyline(
-	[[51.504, -0.02],
-	[51.51, -0.08]],
-	{color: 'red',
-	fillColor: '#f03',
-	fillOpacity: 0.5
-	}).addTo(mymap).bindPopup("I am a line.");
+	var myLine = L.polygon([
+		[51.504, -0.02],
+		[51.51, -0.08]
+		],{
+		color: 'red',
+	    fillColor: '#f03',
+	    fillOpacity: 0.5
+	    }).addTo(mymap).bindPopup("I am a line.");
 
-/*	// add a polygon with 3 end points (i.e. a triangle)
-	var myPolygon = L.polygon(
-	[[51.509, -0.08],
-	[51.503, -0.06],
-	[51.51, -0.047]],
-	{color: 'red',
-	fillColor: '#f03',
-	fillOpacity: 0.5
-	}).addTo(mymap).bindPopup("I am a polygon.");*/
 }
 
-var earthquakelayer;
+var formdatalayer;
 
-function getEarthquakes() {
+function getFormData() {
 	client = new XMLHttpRequest();
-	client.open('GET','https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson');
-	client.onreadystatechange = earthquakeResponse; // note don't use earthquakeResponse() with brackets as that doesn't work
+	var url = 'http://developer.cege.ucl.ac.uk:'+ 30279 + '/getFormData/' + 30279;
+	client.open('GET',url);
+	client.onreadystatechange = formdataResponse; // note don't use earthquakeResponse() with brackets as that doesn't work
 	client.send();
-	} 
+} 
 	// create the code to wait for the response from the data server, and process the response once it isreceived
-	function earthquakeResponse() {
 	// this function listens out for the server to say that the data is ready - i.e. has state 4
+function formdataResponse() {
 	if (client.readyState == 4) {
-	// once the data is ready, process the data
-	var earthquakedata = client.responseText;
-	loadEarthquakelayer(earthquakedata);
+	var formdata = client.responseText;
+	loadFormdatalayer(formdata);
 	}
-	} 
-	// define a global variable to hold the layer so that we can use it later on
-	var earthquakelayer;
+} 
+
 	// convert the received data - which is text - to JSON format and add it to the map
-	function loadEarthquakelayer(earthquakedata) {
+function loadFormdatalayer(formdata) {
 	// convert the text to JSON
-	var earthquakejson = JSON.parse(earthquakedata);
+	var formjson = JSON.parse(formdata);
 	// new line to call global variable
-	earthquakes = earthquakejson;
+	forms = formjson;
 	// add the JSON layer onto the map - it will appear using the default icons
-	earthquakelayer = L.geoJson(earthquakejson).addTo(mymap);
+	formdatalayer = L.geoJson(formjson).addTo(mymap);
 	// change the map zoom so that all the data is shown
-	mymap.fitBounds(earthquakelayer.getBounds());
+	mymap.fitBounds(formdatalayer.getBounds());
+}
+
+
+var xhrNode;
+
+function callDivNodeJSChange() {
+	xhrNode = new XMLHttpRequest();
+	var url = "http://developer.cege.ucl.ac.uk:"+ 30279;
+	xhrNode.open("GET", url, true);
+	xhrNode.onreadystatechange = processDivNodeJSChange;
+	try {
+		xhrNode.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	}
+	catch (e) {
+	// this only works in internet explorer
+	}
+	xhrNode.send();
+}
+
+function processDivNodeJSChange() {
+if (xhrNode.readyState < 4){ // while waiting response from server
+	document.getElementById('ajaxtext').innerHTML = "Loading...";}
+
+	else if (xhrNode.readyState === 4){ // 4 = Response from server has been completely loaded.
+		if (xhrNode.status == 200 && xhrNode.status < 300){
+		// http status between 200 to 299 are all successful
+		document.getElementById('ajaxtext').innerHTML = xhrNode.responseText;}
+	}
+}
