@@ -114,3 +114,37 @@ function checkAnswer(questionID) {
 	// the answerSelected variable holds the number of the answer
 	//that the user picked
 
+function closestFormPoint() {
+	//take leaflet formData layer
+	// go through each point once at a time
+	// and measure the distance to warren street station
+	// for the closest point show the pop up of that point
+
+	var minDistance = 100000000000;
+	var closestFormPoint = 0;
+	// in this example will use the lat/lng of warrenstreet
+	// in the assignment this should be the user's location
+	var userlat = 51.524048;
+	var userlng = -0.139924;
+	formLayer.eachLayer(function(layer) {
+		var distance = calculateDistance(userlat,userlng,layer.getLatLng().lat, layer.getLatLng().lng, 'K');
+		if (distance < minDistance) {
+			minDistance = distance;
+			closestFormPoint = layer.feature.properties.id;
+		}
+
+	});
+
+	// for this to be a proximity alert, the minDistance must be
+	// closer than a given distance - you can check that here
+	// using an if statement
+
+	// show the popup for the closest point
+	formLayer.eachLayer(function(layer) {
+		if (layer.feature.properties.id == closestFormPoint) {
+			layer.openPopup();
+		}
+	});
+}
+
+
