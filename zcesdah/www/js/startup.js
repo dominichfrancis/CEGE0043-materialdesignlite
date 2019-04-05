@@ -1,14 +1,14 @@
 function trackAndCircle() {
 	trackLocation();
 	addPointLinePoly();
-	getFormData();
+	startFormDataLoad();
 	loadW3HTML();
 }
 
 function startup() {
 	document.addEventListener('DOMContentLoaded',function() {
 		getPort();
-		trackAndCircle ();
+		trackAndCircle();
 	}, false);
 }
 
