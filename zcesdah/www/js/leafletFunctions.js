@@ -3,9 +3,11 @@ var client;
 // create point, line and poly
 function addPointLinePoly() {
 
-	L.marker([51.5, -0.09]).addTo(mymap)
-	.bindPopup("<b>Hello!</b><br />Point of interest.").openPopup();
+	var uclQuizMarker = L.marker([51.5248, -0.1336]).addTo(mymap)
+	.bindPopup("<b>Hello! Welcome to the UCL quiz tour!</b><br />UCL Main Building.").openPopup();
+	mymap.setView([51.5248, -0.1336], 12);
 
+// mymap.fitBounds(uclQuizMarker.getBounds());
 
     //adding a circle
     L.circle([51.5,-0.09],100, {
@@ -15,14 +17,14 @@ function addPointLinePoly() {
         }).addTo(mymap);
 
 
-	var myLine = L.polygon([
+/*	var myLine = L.polygon([
 		[51.504, -0.02],
 		[51.51, -0.08]
 		],{
 		color: 'red',
 	    fillColor: '#f03',
 	    fillOpacity: 0.5
-	    }).addTo(mymap).bindPopup("I am a line.");
+	    }).addTo(mymap).bindPopup("I am a line.");*/
 
 }
 var xhrFormData;
@@ -77,7 +79,6 @@ htmlString = htmlString + "</div>";
 return L.marker(latlng).bindPopup(htmlString);
 },
 }).addTo(mymap);
-mymap.fitBounds(formLayer.getBounds());
 }
 
 // add method to process the button click in this pop up

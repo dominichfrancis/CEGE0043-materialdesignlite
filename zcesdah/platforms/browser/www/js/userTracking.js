@@ -13,13 +13,14 @@ function trackLocation() {
 		if (userMarker){
 			mymap.removelayer(userMarker);
 	}
-    userMarker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(mymap)
-    .bindPopup("<b>You were here</b>");
+    userMarker = L.marker([position.coords.latitude, position.coords.longitude])
+    .addTo(mymap).bindPopup("<b>Tracking!</b><br />Current location.").openPopup();
     getDistance();
-    mymap.setView([position.coords.latitude.position.coords.longitude],2)
+    mymap.fitBounds(userMarker);
+    //mymap.setView([position.coords.latitude.position.coords.longitude],13)
 }
 
-
+/*
 function getDistance() {
 	alert('getting distance');
 	// getDistanceFromPoint is the function called once the distance has been found
@@ -73,3 +74,4 @@ function calculateDistance(lat1, lon1, lat2, lon2, unit) {
 	if (unit=="N") { dist = dist * 0.8684 ;} // convert miles to nautical miles
 	return dist;
 }
+*/
