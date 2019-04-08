@@ -32,7 +32,7 @@ var xhrFormData;
 function startFormDataLoad() {
 	xhrFormData = new XMLHttpRequest();
 	var url = "http://developer.cege.ucl.ac.uk:"+30279;
-	url = url + "/getGeoJSON/formdata/geom/"+30279;
+	url = url + "/getGeoJSON/public.quizquestion/location";
 	xhrFormData.open('GET',url, true);
 	xhrFormData.onreadystatechange = formDataResponse; // note don't use earthquakeResponse() with brackets as that doesn't work
 	xhrFormData.send();
@@ -63,11 +63,12 @@ formLayer = L.geoJson(formJSON,
 pointToLayer: function (feature, latlng)
 {
 // in this case we create a div string from the html using the data values
-var htmlString = "<DIV id='popup'"+ feature.properties.id + "><h2>" + feature.properties.name + "</h2><br>";
-htmlString = htmlString + "<h3>"+feature.properties.surname + "</h3><br>";
-htmlString = htmlString + "<input type='radio' name='answer' id='"+feature.properties.id+"_1'/>"+feature.properties.module+"<br>";
-htmlString = htmlString + "<input type='radio' name='answer' id='"+feature.properties.id+"_2'/>"+feature.properties.language+"<br>";
-htmlString = htmlString + "<input type='radio' name='answer' id='"+feature.properties.id+"_3'/>"+feature.properties.lecturetime+"<br>";
+var htmlString = "<DIV id='popup'"+ feature.properties.id + "><h2>" + feature.properties.question_title + "</h2><br>";
+htmlString = htmlString + "<h3>"+feature.properties.question_text + "</h3><br>";
+htmlString = htmlString + "<input type='radio' name='answer' id='"+feature.properties.id+"_1'/>"+feature.properties.answer_1+"<br>";
+htmlString = htmlString + "<input type='radio' name='answer' id='"+feature.properties.id+"_2'/>"+feature.properties.answer_2+"<br>";
+htmlString = htmlString + "<input type='radio' name='answer' id='"+feature.properties.id+"_3'/>"+feature.properties.answer_3+"<br>";
+htmlString = htmlString + "<input type='radio' name='answer' id='"+feature.properties.id+"_3'/>"+feature.properties.answer_4+"<br>";
 htmlString = htmlString + "<input type='radio' name='answer' id='"+feature.properties.id+"_4'/>"+feature.properties.port_id+"<br>";
 htmlString = htmlString + "<button onclick='checkAnswer(" +feature.properties.id + ");return false;'>Submit Answer</button>";
 

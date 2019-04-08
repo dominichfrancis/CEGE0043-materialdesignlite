@@ -16,8 +16,7 @@ function trackLocation() {
     userMarker = L.marker([position.coords.latitude, position.coords.longitude])
     .addTo(mymap).bindPopup("<b>Tracking!</b><br />Current location.").openPopup();
     getDistance();
-    mymap.fitBounds(userMarker);
-    //mymap.setView([position.coords.latitude.position.coords.longitude],13)
+    mymap.setView([position.coords.latitude.position.coords.longitude],14)
 }
 
 /*
