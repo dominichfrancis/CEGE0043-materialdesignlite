@@ -31,8 +31,8 @@ var xhrFormData;
 
 function startFormDataLoad() {
 	xhrFormData = new XMLHttpRequest();
-	var url = "http://developer.cege.ucl.ac.uk:"+30279;
-	url = url + "/getGeoJSON/public.quizquestion/location";
+	var url = 'http://developer.cege.ucl.ac.uk:'+httpPortNumber+'/getQuizPoints/'+httpPortNumber;
+	//url = url + '/getGeoJSON/getQuizPoints/'+httpPortNumber;
 	xhrFormData.open('GET',url, true);
 	xhrFormData.onreadystatechange = formDataResponse; // note don't use earthquakeResponse() with brackets as that doesn't work
 	xhrFormData.send();
@@ -54,7 +54,7 @@ var formLayer;
 function loadFormData(formData) {
 
 // convert the text recived from the server to JSON
-var formJSON = JSON.parse(formData );
+var formJSON = JSON.parse(formData);
 
 // load the geoJSON layer
 formLayer = L.geoJson(formJSON,
